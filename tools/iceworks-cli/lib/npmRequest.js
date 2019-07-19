@@ -7,7 +7,7 @@ const semver = require('semver');
  * @param version package version
  * @param registry package registry
  */
-module.exports = function npmRequest({ name, version = 'latest', registry }) {
+module.exports = function npmRequest({ name, registry, version = 'latest' }) {
   let registryUrl = registry || 'http://registry.npm.taobao.org';
   registryUrl = registryUrl.replace(/\/$/, '');
   const pkgUrl = `${registryUrl}/${name.replace(/\//g, '%2f')}`;

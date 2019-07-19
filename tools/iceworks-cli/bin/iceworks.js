@@ -22,16 +22,21 @@ program.arguments('<command>').action((cmd) => {
 
 program
   .command('init [npmName]')
+  .option('-r, --registry <name>', 'The NPM registry')
   .description('init project by template')
   .on('--help', () => {
     console.log('');
     console.log('Examples:');
     console.log('  $ iceworks init');
     console.log('  $ iceworks init @icedesign/lite-scaffold');
+    console.log('  $ iceworks init @iris/ui-framework --registry https//private.npm.org');
   })
   .action((npmName, cmd) => {
     const options = cleanArgs(cmd);
     options.npmName = npmName;
+    if (cmd.registry) {
+      options.registry = cmd.registry;
+    }
     // eslint-disable-next-line global-require
     require('../command/init')(options);
   });

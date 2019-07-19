@@ -2,8 +2,8 @@
 const getTarball = require('./getTarball');
 const extractTarball = require('./extractTarball');
 
-module.exports = ({ npmName, destDir }) => {
-  return getTarball(npmName)
+module.exports = ({ npmName, registry, destDir }) => {
+  return getTarball(npmName, registry)
     .then((url) => {
       return extractTarball(url, destDir);
     });

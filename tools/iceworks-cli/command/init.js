@@ -21,15 +21,15 @@ async function init(options = {}) {
   const go = await checkEmpty(cwd);
   if (!go) process.exit(1);
 
-  let { npmName } = options;
+  let { npmName, registry } = options;
   if (!options.npmName) {
     npmName = await selectTemplate();
   }
 
   goldlog('version', { version: packageConfig.version });
-  goldlog('init', { npmName });
+  goldlog('init', { npmName, registry });
 
-  await downloadNpm({ npmName, destDir: cwd });
+  await downloadNpm({ npmName, registry, destDir: cwd });
 
   try {
     await formatProject(cwd);

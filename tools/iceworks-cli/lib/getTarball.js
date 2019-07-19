@@ -5,9 +5,9 @@ const npmRequest = require('./npmRequest');
  * @param {*} npm
  * @param {*} version
  */
-module.exports = function getTarball(npm, version = 'latest') {
+module.exports = function getTarball(npm, registry, version = 'latest') {
   return new Promise((resolve, reject) => {
-    npmRequest({ name: npm, version })
+    npmRequest({ name: npm, registry, version })
       .then((pkgData) => {
         resolve(pkgData.dist.tarball);
       })
