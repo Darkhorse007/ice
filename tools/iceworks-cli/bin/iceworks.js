@@ -43,6 +43,7 @@ program
 
 program
   .command('add <npmName>')
+  .option('-r, --registry <name>', 'The NPM registry')
   .description('add block to current directory')
   .option(
     '-n, --name <name>',
@@ -53,10 +54,14 @@ program
     console.log('Examples:');
     console.log('  $ iceworks add @icedesign/user-landing-block');
     console.log('  $ iceworks add @icedesign/user-landing-block -n CustomBlock');
+    console.log('  $ iceworks add @iris/my-ui-block --registry https//private.npm.org');
   })
   .action((npmName, cmd) => {
     const options = cleanArgs(cmd);
     options.npmName = npmName;
+    if (cmd.registry) {
+      options.registry = cmd.registry;
+    }
     // eslint-disable-next-line global-require
     require('../command/addBlock')(options);
   });

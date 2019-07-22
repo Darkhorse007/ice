@@ -25,7 +25,7 @@ module.exports = (options) => {
 };
 
 async function addBlock(options = {}) {
-  const { npmName, destDir, tempDir } = options;
+  const { npmName, destDir, tempDir, registry } = options;
   let { name: blockDirName } = options;
 
   // download npm block
@@ -46,6 +46,7 @@ async function addBlock(options = {}) {
     .then(() => {
       return downloadNpm({
         npmName,
+        registry,
         destDir: tempDir,
       });
     })
